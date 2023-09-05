@@ -38,10 +38,11 @@ public class MyArrayList<E> {
 	// /* ---- YOUR CODE HERE ---- */
 	// }
 
-	// /* Get the index-th object in the list. */
-	// public E get(int index) {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/* Get the index-th object in the list. */
+	public E get(int index) {
+		/* ---- YOUR CODE HERE ---- */
+		return internalArray[index];
+	}
 
 	// /* Replace the object at index with obj. returns object that was replaced. */
 	// public E set(int index, E obj) {
