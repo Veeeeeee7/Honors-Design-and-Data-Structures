@@ -6,6 +6,8 @@
  * Your indexed functions should throw IndexOutOfBoundsException if index is invalid!
  */
 
+import java.util.Objects;
+
 public class MyArrayList<E> {
 
 	/* Internal Object counter */
@@ -61,7 +63,7 @@ public class MyArrayList<E> {
 	public boolean contains(E obj) {
 		/* ---- YOUR CODE HERE ---- */
 		for (int i = 0; i < objectCount; i++) {
-			if (internalArray[i] != null && internalArray[i].equals(obj)) {
+			if (Objects.equals(internalArray[i], obj)) {
 				return true;
 			}
 		}
@@ -94,18 +96,21 @@ public class MyArrayList<E> {
 		return original;
 	}
 
-	// /*
-	// * Removes the first occurrence of the specified element from this list,
-	// * if it is present. If the list does not contain the element, it is
-	// unchanged.
-	// * More formally, removes the element with the lowest index i such that
-	// * (o==null ? get(i)==null : o.equals(get(i))) (if such an element exists).
-	// * Returns true if this list contained the specified element (or equivalently,
-	// * if this list changed as a result of the call).
-	// */
-	// public boolean remove(E obj) {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/*
+	 * Removes the first occurrence of the specified element from this list,
+	 * if it is present. If the list does not contain the element, it is
+	 * unchanged.
+	 * More formally, removes the element with the lowest index i such that
+	 * (o==null ? get(i)==null : o.equals(get(i))) (if such an element exists).
+	 * Returns true if this list contained the specified element (or equivalently,
+	 * if this list changed as a result of the call).
+	 */
+	public boolean remove(E obj) {
+		/* ---- YOUR CODE HERE ---- */
+		int index = indexOf(obj);
+		remove(index);
+		return index > -1;
+	}
 
 	// // This method will search list for all occurrences of obj and move them to
 	// the
@@ -114,6 +119,15 @@ public class MyArrayList<E> {
 	// public void moveToBack(E obj) {
 
 	// }
+
+	public int indexOf(E obj) {
+		for (int i = 0; i < objectCount; i++) {
+			if (Objects.equals(internalArray[i], obj)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	/*
 	 * For testing; your string should output as "[X, X, X, X, ...]" where X, X, X,

@@ -5,12 +5,16 @@ public class Tester {
             list.add(i);
             list.add(null);
         }
-        System.out.println(list);
         System.out.println("Contains 1? " + list.contains(1));
         System.out.println("Contains 11? " + list.contains(11));
-        System.out.println("At index 0: " + list.get(0));
+        System.out.println("At index 1: " + list.get(1));
         System.out.println("Size: " + list.size());
-        list.set(0, 100);
+        list.set(1, 100);
+        list.remove(3);
+        list.remove(new Integer(3));
+        System.out.println(list);
+        list.remove(null);
+        System.out.println(list);
 
     }
 }
