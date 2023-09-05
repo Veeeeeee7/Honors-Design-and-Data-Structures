@@ -70,11 +70,16 @@ public class MyArrayList<E> {
 		return false;
 	}
 
-	// /* Insert an object at index */
-	// @SuppressWarnings("unchecked")
-	// public void add(int index, E obj) {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/* Insert an object at index */
+	@SuppressWarnings("unchecked")
+	public void add(int index, E obj) {
+		/* ---- YOUR CODE HERE ---- */
+		for (int i = objectCount; i > index; i--) {
+			internalArray[i] = internalArray[i - 1];
+		}
+		internalArray[index] = obj;
+		objectCount++;
+	}
 
 	/* Add an object to the end of the list; returns true */
 	@SuppressWarnings("unchecked")

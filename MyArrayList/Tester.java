@@ -15,6 +15,8 @@ public class Tester {
         System.out.println(list);
         list.remove(null);
         System.out.println(list);
+        list.add(1, 200);
+        System.out.println(list);
 
     }
 }
