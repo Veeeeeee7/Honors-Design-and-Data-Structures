@@ -48,13 +48,19 @@ public class MyArrayList<E> {
 	// /* ---- YOUR CODE HERE ---- */
 	// }
 
-	// /*
-	// * Returns true if this list contains an element equal to obj;
-	// * otherwise returns false.
-	// */
-	// public boolean contains(E obj) {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/*
+	 * Returns true if this list contains an element equal to obj;
+	 * otherwise returns false.
+	 */
+	public boolean contains(E obj) {
+		/* ---- YOUR CODE HERE ---- */
+		for (int i = 0; i < objectCount; i++) {
+			if (internalArray[i].equals(obj)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	// /* Insert an object at index */
 	// @SuppressWarnings("unchecked")

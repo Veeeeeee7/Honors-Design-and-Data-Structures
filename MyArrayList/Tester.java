@@ -4,5 +4,7 @@ public class Tester {
         list.add(1);
         list.add(2);
         System.out.println(list);
+        System.out.println(list.contains(1));
+        System.out.println(list.contains(3));
     }
 }
