@@ -61,7 +61,7 @@ public class MyArrayList<E> {
 	public boolean contains(E obj) {
 		/* ---- YOUR CODE HERE ---- */
 		for (int i = 0; i < objectCount; i++) {
-			if (internalArray[i].equals(obj)) {
+			if (internalArray[i] != null && internalArray[i].equals(obj)) {
 				return true;
 			}
 		}
@@ -83,10 +83,16 @@ public class MyArrayList<E> {
 		return objectCount == internalArray.length;
 	}
 
-	// /* Remove the object at index and shift. Returns removed object. */
-	// public E remove(int index) {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/* Remove the object at index and shift. Returns removed object. */
+	public E remove(int index) {
+		/* ---- YOUR CODE HERE ---- */
+		E original = internalArray[index];
+		for (int i = index; i < objectCount - 1; i++) {
+			internalArray[i] = internalArray[i + 1];
+		}
+		objectCount--;
+		return original;
+	}
 
 	// /*
 	// * Removes the first occurrence of the specified element from this list,
@@ -121,9 +127,16 @@ public class MyArrayList<E> {
 		StringBuilder str = new StringBuilder();
 		str.append("[");
 		for (int i = 0; i < objectCount; i++) {
-			str.append(internalArray[i].toString());
-			if (i < objectCount - 1) {
-				str.append(", ");
+			if (internalArray[i] == null) {
+				str.append("null");
+				if (i < objectCount - 1) {
+					str.append(", ");
+				}
+			} else {
+				str.append(internalArray[i].toString());
+				if (i < objectCount - 1) {
+					str.append(", ");
+				}
 			}
 		}
 		str.append("]");
