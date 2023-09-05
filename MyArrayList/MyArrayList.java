@@ -45,12 +45,18 @@ public class MyArrayList<E> {
 	/* Get the index-th object in the list. */
 	public E get(int index) {
 		/* ---- YOUR CODE HERE ---- */
+		if (index < 0 || index >= objectCount) {
+			throw new IndexOutOfBoundsException();
+		}
 		return internalArray[index];
 	}
 
 	/* Replace the object at index with obj. returns object that was replaced. */
 	public E set(int index, E obj) {
 		/* ---- YOUR CODE HERE ---- */
+		if (index < 0 || index >= objectCount) {
+			throw new IndexOutOfBoundsException();
+		}
 		E original = internalArray[index];
 		internalArray[index] = obj;
 		return original;
@@ -74,6 +80,9 @@ public class MyArrayList<E> {
 	@SuppressWarnings("unchecked")
 	public void add(int index, E obj) {
 		/* ---- YOUR CODE HERE ---- */
+		if (index < 0 || index > objectCount) {
+			throw new IndexOutOfBoundsException();
+		}
 		for (int i = objectCount; i > index; i--) {
 			internalArray[i] = internalArray[i - 1];
 		}
@@ -93,6 +102,9 @@ public class MyArrayList<E> {
 	/* Remove the object at index and shift. Returns removed object. */
 	public E remove(int index) {
 		/* ---- YOUR CODE HERE ---- */
+		if (index < 0 || index >= objectCount) {
+			throw new IndexOutOfBoundsException();
+		}
 		E original = internalArray[index];
 		for (int i = index; i < objectCount - 1; i++) {
 			internalArray[i] = internalArray[i + 1];
@@ -113,17 +125,25 @@ public class MyArrayList<E> {
 	public boolean remove(E obj) {
 		/* ---- YOUR CODE HERE ---- */
 		int index = indexOf(obj);
-		remove(index);
+		if (index > -1) {
+			remove(index);
+		}
 		return index > -1;
 	}
 
-	// // This method will search list for all occurrences of obj and move them to
-	// the
-	// // end
-	// // of the list without disrupting the order of the other elements.
-	// public void moveToBack(E obj) {
-
-	// }
+	// This method will search list for all occurrences of obj and move them to the
+	// end
+	// of the list without disrupting the order of the other elements.
+	public void moveToBack(E obj) {
+		for (int i = 0; i < objectCount; i++) {
+			if (Objects.equals(internalArray[i], obj)) {
+				for (int j = i; j < objectCount - 1; j++) {
+					internalArray[j] = internalArray[j + 1];
+				}
+				internalArray[objectCount - 1] = obj;
+			}
+		}
+	}
 
 	public int indexOf(E obj) {
 		for (int i = 0; i < objectCount; i++) {
