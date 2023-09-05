@@ -46,10 +46,13 @@ public class MyArrayList<E> {
 		return internalArray[index];
 	}
 
-	// /* Replace the object at index with obj. returns object that was replaced. */
-	// public E set(int index, E obj) {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/* Replace the object at index with obj. returns object that was replaced. */
+	public E set(int index, E obj) {
+		/* ---- YOUR CODE HERE ---- */
+		E original = internalArray[index];
+		internalArray[index] = obj;
+		return original;
+	}
 
 	/*
 	 * Returns true if this list contains an element equal to obj;
