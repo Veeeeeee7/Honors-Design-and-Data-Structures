@@ -29,14 +29,16 @@ public class MyArrayList<E> {
 	}
 
 	/* Return the number of active slots in the array list */
-	// public int size() {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	public int size() {
+		/* ---- YOUR CODE HERE ---- */
+		return objectCount;
+	}
 
-	// /* Are there zero objects in the array list? */
-	// public boolean isEmpty() {
-	// /* ---- YOUR CODE HERE ---- */
-	// }
+	/* Are there zero objects in the array list? */
+	public boolean isEmpty() {
+		/* ---- YOUR CODE HERE ---- */
+		return objectCount == 0;
+	}
 
 	/* Get the index-th object in the list. */
 	public E get(int index) {
