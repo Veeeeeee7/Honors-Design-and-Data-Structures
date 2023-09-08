@@ -31,18 +31,21 @@ public class MyArrayList<E> {
 	}
 
 	/* Return the number of active slots in the array list */
+	// O(1)
 	public int size() {
 		/* ---- YOUR CODE HERE ---- */
 		return objectCount;
 	}
 
 	/* Are there zero objects in the array list? */
+	// O(1)
 	public boolean isEmpty() {
 		/* ---- YOUR CODE HERE ---- */
 		return objectCount == 0;
 	}
 
 	/* Get the index-th object in the list. */
+	// O(1)
 	public E get(int index) {
 		/* ---- YOUR CODE HERE ---- */
 		if (index < 0 || index >= objectCount) {
@@ -52,6 +55,7 @@ public class MyArrayList<E> {
 	}
 
 	/* Replace the object at index with obj. returns object that was replaced. */
+	// O(1)
 	public E set(int index, E obj) {
 		/* ---- YOUR CODE HERE ---- */
 		if (index < 0 || index >= objectCount) {
@@ -66,6 +70,7 @@ public class MyArrayList<E> {
 	 * Returns true if this list contains an element equal to obj;
 	 * otherwise returns false.
 	 */
+	// O(n)
 	public boolean contains(E obj) {
 		/* ---- YOUR CODE HERE ---- */
 		for (int i = 0; i < objectCount; i++) {
@@ -77,6 +82,7 @@ public class MyArrayList<E> {
 	}
 
 	/* Insert an object at index */
+	// O(n)
 	@SuppressWarnings("unchecked")
 	public void add(int index, E obj) {
 		/* ---- YOUR CODE HERE ---- */
@@ -91,6 +97,7 @@ public class MyArrayList<E> {
 	}
 
 	/* Add an object to the end of the list; returns true */
+	// O(1)
 	@SuppressWarnings("unchecked")
 	public boolean add(E obj) {
 		/* ---- YOUR CODE HERE ---- */
@@ -100,6 +107,7 @@ public class MyArrayList<E> {
 	}
 
 	/* Remove the object at index and shift. Returns removed object. */
+	// O(n)
 	public E remove(int index) {
 		/* ---- YOUR CODE HERE ---- */
 		if (index < 0 || index >= objectCount) {
@@ -122,6 +130,7 @@ public class MyArrayList<E> {
 	 * Returns true if this list contained the specified element (or equivalently,
 	 * if this list changed as a result of the call).
 	 */
+	// O(n)
 	public boolean remove(E obj) {
 		/* ---- YOUR CODE HERE ---- */
 		int index = indexOf(obj);
@@ -134,6 +143,7 @@ public class MyArrayList<E> {
 	// This method will search list for all occurrences of obj and move them to the
 	// end
 	// of the list without disrupting the order of the other elements.
+	// O(n^2)
 	public void moveToBack(E obj) {
 		for (int i = 0; i < objectCount; i++) {
 			if (Objects.equals(internalArray[i], obj)) {
@@ -153,6 +163,27 @@ public class MyArrayList<E> {
 		}
 		return -1;
 	}
+
+	public void clear() {
+		for (int i = 0; i < objectCount; i++) {
+			internalArray[i] = null;
+		}
+		objectCount = 0;
+	}
+
+	public boolean removeLast(E obj) {
+		for (int i = objectCount - 1; i >= 0; i--) {
+			if (Objects.equals(internalArray[i], obj)) {
+				remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// public boolean removeAll(MyArrayList<E> list) {
+
+	// }
 
 	/*
 	 * For testing; your string should output as "[X, X, X, X, ...]" where X, X, X,
