@@ -89,6 +89,9 @@ public class MyArrayList<E> {
 		if (index < 0 || index > objectCount) {
 			throw new IndexOutOfBoundsException();
 		}
+		if (objectCount == internalArray.length) {
+			increaseCapacity(internalArray.length * 2);
+		}
 		for (int i = objectCount; i > index; i--) {
 			internalArray[i] = internalArray[i - 1];
 		}
@@ -101,9 +104,19 @@ public class MyArrayList<E> {
 	@SuppressWarnings("unchecked")
 	public boolean add(E obj) {
 		/* ---- YOUR CODE HERE ---- */
+		if (objectCount == internalArray.length) {
+			increaseCapacity(internalArray.length * 2);
+		}
 		internalArray[objectCount] = obj;
 		objectCount++;
 		return objectCount == internalArray.length;
+	}
+
+	private void increaseCapacity(int newCapacity) {
+		E[] newArray = (E[]) new Object[newCapacity];
+		for (int i = 0; i < objectCount; i++) {
+			newArray[i] = internalArray[i];
+		}
 	}
 
 	/* Remove the object at index and shift. Returns removed object. */
