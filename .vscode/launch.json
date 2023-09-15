@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MoveToBackTester",
+            "request": "launch",
+            "mainClass": "MoveToBackTester",
+            "projectName": "Honors-Design-and-Data-Structures_49875a9f"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

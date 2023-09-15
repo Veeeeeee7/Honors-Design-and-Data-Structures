@@ -17,6 +17,7 @@ public class MyArrayList<E> {
 	protected E[] internalArray;
 
 	/* Constructor: Create it with whatever capacity you want? */
+	// O(1)
 	@SuppressWarnings("unchecked")
 	public MyArrayList() {
 		this.internalArray = (E[]) new Object[100];
@@ -24,6 +25,7 @@ public class MyArrayList<E> {
 	}
 
 	/* Constructor with initial capacity */
+	// O(1)
 	@SuppressWarnings("unchecked")
 	public MyArrayList(int initialCapacity) {
 		this.internalArray = (E[]) new Object[initialCapacity];
@@ -100,7 +102,8 @@ public class MyArrayList<E> {
 	}
 
 	/* Add an object to the end of the list; returns true */
-	// O(1)
+	// O(1) on average
+	// Worst case O(n)
 	@SuppressWarnings("unchecked")
 	public boolean add(E obj) {
 		/* ---- YOUR CODE HERE ---- */
@@ -112,11 +115,14 @@ public class MyArrayList<E> {
 		return objectCount == internalArray.length;
 	}
 
+	// O(n)
+	@SuppressWarnings("unchecked")
 	private void increaseCapacity(int newCapacity) {
 		E[] newArray = (E[]) new Object[newCapacity];
 		for (int i = 0; i < objectCount; i++) {
 			newArray[i] = internalArray[i];
 		}
+		internalArray = newArray;
 	}
 
 	/* Remove the object at index and shift. Returns removed object. */
@@ -153,37 +159,7 @@ public class MyArrayList<E> {
 		return index > -1;
 	}
 
-	// This method will search list for all occurrences of obj and move them to the
-	// end
-	// of the list without disrupting the order of the other elements.
 	// O(n^2)
-	public void moveToBack(E obj) {
-		for (int i = 0; i < objectCount; i++) {
-			if (Objects.equals(internalArray[i], obj)) {
-				for (int j = i; j < objectCount - 1; j++) {
-					internalArray[j] = internalArray[j + 1];
-				}
-				internalArray[objectCount - 1] = obj;
-			}
-		}
-	}
-
-	public int indexOf(E obj) {
-		for (int i = 0; i < objectCount; i++) {
-			if (Objects.equals(internalArray[i], obj)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public void clear() {
-		for (int i = 0; i < objectCount; i++) {
-			internalArray[i] = null;
-		}
-		objectCount = 0;
-	}
-
 	public boolean removeLast(E obj) {
 		for (int i = objectCount - 1; i >= 0; i--) {
 			if (Objects.equals(internalArray[i], obj)) {
@@ -194,9 +170,64 @@ public class MyArrayList<E> {
 		return false;
 	}
 
-	// public boolean removeAll(MyArrayList<E> list) {
+	// O(n^2)
+	public boolean removeAll(MyArrayList<E> list) {
+		for (int i = 0; i < list.size(); i++) {
+			remove(list.get(i));
+		}
+		return true;
+	}
 
-	// }
+	// O(n)
+	public void removeRange(int start, int end) {
+		for (int i = start; i < end; i++) {
+			internalArray[i] = internalArray[i + (end - start)];
+		}
+		objectCount -= (end - start);
+	}
+
+	// This method will search list for all occurrences of obj and move them to the
+	// end
+	// of the list without disrupting the order of the other elements.
+	// O(n^2)
+	@SuppressWarnings("unchecked")
+	public void moveToBack(E obj) {
+		int count = 0;
+		int index = 0;
+		E[] list = (E[]) new Object[objectCount];
+		for (int i = 0; i < objectCount; i++) {
+			if (!Objects.equals(internalArray[i], obj)) {
+				list[index] = internalArray[i];
+				index++;
+			} else {
+				count++;
+			}
+		}
+
+		for (int i = 0; i < count; i++) {
+			list[index] = obj;
+			index++;
+		}
+		internalArray = list;
+	}
+
+	// O(n)
+	public int indexOf(E obj) {
+		for (int i = 0; i < objectCount; i++) {
+			if (Objects.equals(internalArray[i], obj)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	// O(n)
+	public void clear() {
+		for (int i = 0; i < objectCount; i++) {
+			internalArray[i] = null;
+		}
+		objectCount = 0;
+	}
 
 	/*
 	 * For testing; your string should output as "[X, X, X, X, ...]" where X, X, X,
@@ -205,6 +236,7 @@ public class MyArrayList<E> {
 	 * etc.
 	 * Elements are separated by a comma and a space.
 	 */
+	// O(n)
 	public String toString() {
 		/* ---- YOUR CODE HERE ---- */
 		StringBuilder str = new StringBuilder();
