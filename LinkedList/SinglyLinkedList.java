@@ -13,17 +13,17 @@ public class SinglyLinkedList<E> {
 
 	// Constructor: creates a list that contains
 	// all elements from the array values, in the same order
-	public SinglyLinkedList(Object[] values) {
+	public SinglyLinkedList(E[] values) {
 		if (values.length == 0) {
 			return;
 		}
-		head = new ListNode<>((E) values[0]);
+		head = new ListNode<>(values[0]);
 		ListNode<E> currentNode = head;
 		for (int i = 1; i < values.length - 1; i++) {
-			currentNode.setNext(new ListNode<>((E) values[i]));
+			currentNode.setNext(new ListNode<>(values[i]));
 			currentNode = currentNode.getNext();
 		}
-		currentNode.setNext(new ListNode<>((E) values[values.length - 1]));
+		currentNode.setNext(new ListNode<>(values[values.length - 1]));
 		tail = currentNode.getNext();
 	}
 
@@ -48,11 +48,22 @@ public class SinglyLinkedList<E> {
 	// Returns true if this list contains an element equal to obj;
 	// otherwise returns false.
 	public boolean contains(E obj) {
+		return indexOf(obj) > -1;
 	}
 
 	// Returns the index of the first element in equal to obj;
 	// if not found, returns -1.
 	public int indexOf(E obj) {
+		ListNode<E> currentNode = head;
+		int index = 0;
+		while (currentNode != null) {
+			if (currentNode.getValue().equals(obj)) {
+				return index;
+			}
+			currentNode = currentNode.getNext();
+			index++;
+		}
+		return -1;
 	}
 
 	// Adds obj to this collection. Returns true if successful;
@@ -73,27 +84,33 @@ public class SinglyLinkedList<E> {
 	// Removes the first element that is equal to obj, if any.
 	// Returns true if successful; otherwise returns false.
 	public boolean remove(E obj) {
+		int index = indexOf(obj);
+		if (index < 0) {
+			return false;
+		}
 
+		return true;
 	}
 
 	// Returns the i-th element.
-	public E get(int i) {
-	}
+	// public E get(int i) {
 
-	// Replaces the i-th element with obj and returns the old value.
-	public E set(int i, Object obj) {
-	}
+	// }
 
-	// Inserts obj to become the i-th element. Increments the size
-	// of the list by one.
-	public void add(int i, Object obj) {
-	}
+	// // Replaces the i-th element with obj and returns the old value.
+	// public E set(int i, E obj) {
+	// }
 
-	// Removes the i-th element and returns its value.
-	// Decrements the size of the list by one.
-	public E remove(int i) {
+	// // Inserts obj to become the i-th element. Increments the size
+	// // of the list by one.
+	// public void add(int i, E obj) {
+	// }
 
-	}
+	// // Removes the i-th element and returns its value.
+	// // Decrements the size of the list by one.
+	// public E remove(int i) {
+
+	// }
 
 	// Returns a string representation of this list exactly like that for
 	// MyArrayList.
