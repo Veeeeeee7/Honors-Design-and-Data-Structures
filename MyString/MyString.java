@@ -80,7 +80,7 @@ public class MyString {
         return sum;
     }
 
-    // O(nm)
+    // O(n^2) O(nm)
     public int indexOf(MyString str) {
         if (str.length() > chars.length) {
             return -1;
@@ -100,7 +100,7 @@ public class MyString {
         return -1;
     }
 
-    // O(nm)
+    // O(n^2) O(nm)
     public int indexOf(MyString str, int fromindex) {
         if (str.length() > chars.length) {
             return -1;
