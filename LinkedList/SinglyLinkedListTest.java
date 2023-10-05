@@ -41,7 +41,12 @@ public class SinglyLinkedListTest {
         String[] l = { "BAB", "BEB", "BIB", "BOB", "BUB" };
         SinglyLinkedList<String> list = new SinglyLinkedList<>(l);
         assertEquals("does not get the right value", "BEB", list.get(1));
-        assertEquals("corner case negative index", null, list.get(-2));
+        try {
+            list.get(-2);
+            assertEquals("corner case negative index", new IndexOutOfBoundsException(), list.get(-2));
+        } catch (Exception e) {
+            assertEquals("not the right exception is thrown", e, new IndexOutOfBoundsException());
+        }
         assertEquals("corner case out of bounds index", null, list.get(55));
     }
 
