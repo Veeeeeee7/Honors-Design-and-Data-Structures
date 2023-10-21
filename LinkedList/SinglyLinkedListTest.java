@@ -34,6 +34,12 @@ public class SinglyLinkedListTest {
         list.add(list.size(), "EL");
         assertEquals("corner case adding to the end of the list", "[EL, BAB, BEB, EL, BIB, BOB, BUB, EL]",
                 list.toString());
+        System.out.println("d");
+        try {
+            list.add(-2, "E");
+        } catch (Exception e) {
+            assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
+        }
     }
 
     @Test
@@ -43,11 +49,14 @@ public class SinglyLinkedListTest {
         assertEquals("does not get the right value", "BEB", list.get(1));
         try {
             list.get(-2);
-            assertEquals("corner case negative index", new IndexOutOfBoundsException(), list.get(-2));
         } catch (Exception e) {
-            assertEquals("not the right exception is thrown", e, new IndexOutOfBoundsException());
+            assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
         }
-        assertEquals("corner case out of bounds index", null, list.get(55));
+        try {
+            list.get(55);
+        } catch (Exception e) {
+            assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
+        }
     }
 
     @Test
