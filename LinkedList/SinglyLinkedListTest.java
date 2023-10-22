@@ -34,12 +34,16 @@ public class SinglyLinkedListTest {
         list.add(list.size(), "EL");
         assertEquals("corner case adding to the end of the list", "[EL, BAB, BEB, EL, BIB, BOB, BUB, EL]",
                 list.toString());
-        System.out.println("d");
+        assertEquals("object count", 8, list.size());
         try {
             list.add(-2, "E");
         } catch (Exception e) {
             assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
         }
+        SinglyLinkedList<String> emptyList = new SinglyLinkedList<>();
+        emptyList.add(0, "FIRST ENTRY");
+        assertEquals("object count", 1, emptyList.size());
+        assertEquals("corner case adding to the first index of an empty list", "[FIRST ENTRY]", emptyList.toString());
     }
 
     @Test
@@ -80,7 +84,8 @@ public class SinglyLinkedListTest {
         assertEquals("corner case removing the first object", "[BEB, BIB, BUB]", list.toString());
         list.remove("BUB");
         assertEquals("corner case remove the second object", "[BEB, BIB]", list.toString());
-
+        assertEquals("corner case removing wrong object", false, list.remove("E"));
+        assertEquals("object count", 2, list.size());
     }
 
     @Test
@@ -94,6 +99,7 @@ public class SinglyLinkedListTest {
         assertEquals("corner case removing the first object", "[BEB, BIB, BUB]", list.toString());
         list.remove(2);
         assertEquals("corner case remove the second object", "[BEB, BIB]", list.toString());
+        assertEquals("object count", 2, list.size());
     }
 
     @Test
@@ -107,6 +113,11 @@ public class SinglyLinkedListTest {
         assertEquals("corner case set the last value", "[BAB, BEB, BAD, BOB, BAD]", list.toString());
         list.set(0, "BAD");
         assertEquals("corner case set the first value", "[BAD, BEB, BAD, BOB, BAD]", list.toString());
+        try {
+            list.set(55, "BAD");
+        } catch (Exception e) {
+            assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
+        }
     }
 
     @Test

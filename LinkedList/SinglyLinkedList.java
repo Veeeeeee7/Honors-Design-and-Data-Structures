@@ -85,14 +85,13 @@ public class SinglyLinkedList<E> {
 	// Removes the first element that is equal to obj, if any.
 	// Returns true if successful; otherwise returns false.
 	public boolean remove(E obj) {
-		int index = 0;
 		ListNode<E> currentNode = head;
 		if (head.getValue().equals(obj)) {
 			head = head.getNext();
 			nodeCount--;
 			return true;
 		}
-		while (index < nodeCount) {
+		while (currentNode.getNext() != null) {
 			if (currentNode.getNext().getValue().equals(obj)) {
 				ListNode<E> nextNode = currentNode.getNext();
 				currentNode.setNext(nextNode.getNext());
@@ -100,7 +99,6 @@ public class SinglyLinkedList<E> {
 				return true;
 			}
 			currentNode = currentNode.getNext();
-			index++;
 		}
 		return false;
 	}
