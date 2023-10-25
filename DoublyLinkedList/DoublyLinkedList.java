@@ -106,7 +106,7 @@ public class DoublyLinkedList {
 			return false;
 		}
 		ListNode2<Nucleotide> current = SENTINEL;
-		while (current.getNext() != null) {
+		while (current.getNext().getValue() != null) {
 			current = current.getNext();
 			if (current.getValue().equals(obj)) {
 				current.getPrevious().setNext(current.getNext());
@@ -133,7 +133,8 @@ public class DoublyLinkedList {
 	// Replaces the i-th element with obj and returns the old value.
 	public Nucleotide set(int i, Nucleotide obj) {
 		if (checkIndex(i)) {
-			throw new IndexOutOfBoundsException();
+			// throw new IndexOutOfBoundsException();
+			return null;
 		}
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
 		for (int index = 0; index < i; index++) {
@@ -152,7 +153,8 @@ public class DoublyLinkedList {
 			return;
 		}
 		if (checkIndex(i)) {
-			throw new IndexOutOfBoundsException();
+			// throw new IndexOutOfBoundsException();
+			return;
 		}
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
 		for (int index = 0; index < i - 1; index++) {
@@ -170,7 +172,8 @@ public class DoublyLinkedList {
 	// Decrements the size of the list by one.
 	public Nucleotide remove(int i) {
 		if (checkIndex(i)) {
-			throw new IndexOutOfBoundsException();
+			// throw new IndexOutOfBoundsException();
+			return null;
 		}
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
 		for (int index = 0; index < i; index++) {
@@ -186,11 +189,13 @@ public class DoublyLinkedList {
 	// MyArrayList.
 	public String toString() {
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder("[");
 		while (current.getValue() != null) {
-			sb.append(current.getValue().toString());
+			sb.append(current.getValue().toString() + ", ");
 			current = current.getNext();
 		}
+		sb.delete(sb.length() - 2, sb.length());
+		sb.append("]");
 		return sb.toString();
 	}
 
