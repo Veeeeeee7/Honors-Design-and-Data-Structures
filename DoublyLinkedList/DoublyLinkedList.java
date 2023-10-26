@@ -133,8 +133,7 @@ public class DoublyLinkedList {
 	// Replaces the i-th element with obj and returns the old value.
 	public Nucleotide set(int i, Nucleotide obj) {
 		if (checkIndex(i)) {
-			// throw new IndexOutOfBoundsException();
-			return null;
+			throw new IndexOutOfBoundsException();
 		}
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
 		for (int index = 0; index < i; index++) {
@@ -153,11 +152,10 @@ public class DoublyLinkedList {
 			return;
 		}
 		if (checkIndex(i)) {
-			// throw new IndexOutOfBoundsException();
-			return;
+			throw new IndexOutOfBoundsException();
 		}
-		ListNode2<Nucleotide> current = SENTINEL.getNext();
-		for (int index = 0; index < i - 1; index++) {
+		ListNode2<Nucleotide> current = SENTINEL;
+		for (int index = 0; index < i; index++) {
 			current = current.getNext();
 		}
 		ListNode2<Nucleotide> node = new ListNode2<Nucleotide>(obj);
@@ -172,8 +170,7 @@ public class DoublyLinkedList {
 	// Decrements the size of the list by one.
 	public Nucleotide remove(int i) {
 		if (checkIndex(i)) {
-			// throw new IndexOutOfBoundsException();
-			return null;
+			throw new IndexOutOfBoundsException();
 		}
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
 		for (int index = 0; index < i; index++) {
@@ -188,6 +185,9 @@ public class DoublyLinkedList {
 	// Returns a string representation of this list exactly like that for
 	// MyArrayList.
 	public String toString() {
+		if (nodeCount == 0) {
+			return "[]";
+		}
 		ListNode2<Nucleotide> current = SENTINEL.getNext();
 		StringBuilder sb = new StringBuilder("[");
 		while (current.getValue() != null) {
@@ -251,6 +251,7 @@ public class DoublyLinkedList {
 					if (nextNode.getValue() == null) {
 						left.getPrevious().setNext(right);
 						right.setPrevious(left.getPrevious());
+						nodeCount -= seg.size();
 						return true;
 					}
 				}
@@ -290,6 +291,7 @@ public class DoublyLinkedList {
 				aNode.setNext(cNode);
 				cNode.setPrevious(aNode);
 				cNode.setNext(nextNode);
+				nodeCount += 2;
 			}
 			current = current.getPrevious();
 		}
