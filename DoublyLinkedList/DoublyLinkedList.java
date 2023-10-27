@@ -8,6 +8,7 @@ public class DoublyLinkedList {
 
 	// Constructor: creates an empty list
 	public DoublyLinkedList() {
+		nodeCount = 0;
 		SENTINEL.setNext(SENTINEL);
 		SENTINEL.setPrevious(SENTINEL);
 	}
@@ -232,23 +233,18 @@ public class DoublyLinkedList {
 	// (on the test these nodes were assumed to contain CCCCCCCCGGGGGGGG, but here
 	// you do not need to assume or check for that)
 	public void removeCCCCCCCCGGGGGGGG(ListNode2<Nucleotide> nodeBefore) {
-		ListNode2<Nucleotide> current = SENTINEL;
-		while (current.getNext() != null) {
-			current = current.getNext();
-			if (current.getValue().equals(nodeBefore.getValue())) {
-				ListNode2<Nucleotide> nextNode = current;
-				for (int i = 0; i < 17; i++) {
-					if (nextNode.getNext().equals(SENTINEL)) {
-						return;
-					}
-					nextNode = nextNode.getNext();
-				}
-				current.setNext(nextNode);
-				nextNode.setPrevious(current);
-				nodeCount -= 16;
+		ListNode2<Nucleotide> nextNode = nodeBefore;
+		for (int i = 0; i < 17; i++) {
+			if (nextNode.getNext().equals(SENTINEL)) {
 				return;
 			}
+			nextNode = nextNode.getNext();
 		}
+		nodeBefore.setNext(nextNode);
+		nextNode.setPrevious(nodeBefore);
+		nodeCount -= 16;
+		return;
+
 	}
 
 	// Like question 9 on the SinglyLinkedList test:
