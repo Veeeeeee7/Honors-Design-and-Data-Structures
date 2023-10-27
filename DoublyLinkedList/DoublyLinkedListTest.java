@@ -24,6 +24,7 @@ public class DoublyLinkedListTest {
         list.add(6, Nucleotide.A);
         list.add(0, Nucleotide.T);
         assertEquals("[T, A, G, A, G, G, G, A]", list.toString());
+        assertEquals("[A, G, G, G, A, G, A, T]", list.backwardsToString());
     }
 
     @Test

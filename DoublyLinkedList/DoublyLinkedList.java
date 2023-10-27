@@ -86,6 +86,8 @@ public class DoublyLinkedList {
 			ListNode2<Nucleotide> node = new ListNode2<Nucleotide>(obj);
 			SENTINEL.setNext(node);
 			SENTINEL.setPrevious(node);
+			node.setPrevious(SENTINEL);
+			node.setNext(SENTINEL);
 			nodeCount++;
 			return true;
 		}
@@ -193,6 +195,21 @@ public class DoublyLinkedList {
 		while (current.getValue() != null) {
 			sb.append(current.getValue().toString() + ", ");
 			current = current.getNext();
+		}
+		sb.delete(sb.length() - 2, sb.length());
+		sb.append("]");
+		return sb.toString();
+	}
+
+	public String backwardsToString() {
+		if (nodeCount == 0) {
+			return "[]";
+		}
+		ListNode2<Nucleotide> current = SENTINEL.getPrevious();
+		StringBuilder sb = new StringBuilder("[");
+		while (current.getValue() != null) {
+			sb.append(current.getValue().toString() + ", ");
+			current = current.getPrevious();
 		}
 		sb.delete(sb.length() - 2, sb.length());
 		sb.append("]");

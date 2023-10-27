@@ -14,10 +14,13 @@ public class Tester {
         // list.removeCCCCCCCCGGGGGGGG(new ListNode2<Nucleotide>(Nucleotide.A));
         // list.deleteLastThree();
 
-        Nucleotide[] n = { Nucleotide.G, Nucleotide.G, Nucleotide.G, Nucleotide.G };
-        DoublyLinkedList list = new DoublyLinkedList(n);
-        list.add(-1, Nucleotide.A);
+        // Nucleotide[] n = { Nucleotide.G, Nucleotide.G, Nucleotide.G, Nucleotide.G };
+        // DoublyLinkedList list = new DoublyLinkedList(n);
+        // list.add(-1, Nucleotide.A);
 
+        // System.out.println(list);
+        DoublyLinkedList list = new DoublyLinkedList();
+        list.add(Nucleotide.A);
         System.out.println(list);
     }
 }
