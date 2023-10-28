@@ -49,12 +49,24 @@ public class DoublyLinkedListTest {
 
     @Test
     void testGet() {
-
+        DoublyLinkedList list = new DoublyLinkedList();
+        list.add(Nucleotide.A);
+        list.add(Nucleotide.A);
+        list.add(Nucleotide.T);
+        assertEquals(Nucleotide.A, list.get(0));
+        assertEquals(Nucleotide.T, list.get(2));
     }
 
     @Test
     void testIndexOf() {
-
+        DoublyLinkedList list = new DoublyLinkedList();
+        list.add(Nucleotide.A);
+        list.add(Nucleotide.A);
+        list.add(Nucleotide.T);
+        assertEquals("[A, A, T]", list.toString());
+        assertEquals(0, list.indexOf(Nucleotide.A));
+        assertEquals(3, list.size());
+        assertEquals(-1, list.indexOf(Nucleotide.G));
     }
 
     @Test

@@ -9,6 +9,7 @@ public class DoublyLinkedList {
 		nodeCount = 0;
 		SENTINEL.setNext(SENTINEL);
 		SENTINEL.setPrevious(SENTINEL);
+		nodeCount = 0;
 	}
 
 	// Constructor: creates a list that contains
@@ -17,6 +18,7 @@ public class DoublyLinkedList {
 		if (values.length == 0) {
 			SENTINEL.setNext(SENTINEL);
 			SENTINEL.setPrevious(SENTINEL);
+			nodeCount = 0;
 			return;
 		}
 
@@ -68,7 +70,7 @@ public class DoublyLinkedList {
 	public int indexOf(Nucleotide obj) {
 		ListNode2<Nucleotide> current = SENTINEL;
 		int index = 0;
-		while (current.getNext() != null) {
+		while (current.getNext().getValue() != null) {
 			current = current.getNext();
 			if (current.getValue().equals(obj)) {
 				return index;
