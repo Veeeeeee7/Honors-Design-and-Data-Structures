@@ -74,6 +74,8 @@ public class SinglyLinkedList<E> {
 		if (head == null) {
 			head = currentNode;
 			tail = currentNode;
+			nodeCount++;
+			return true;
 		}
 
 		tail.setNext(currentNode);
