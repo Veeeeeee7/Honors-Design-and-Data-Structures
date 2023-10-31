@@ -86,6 +86,8 @@ public class SinglyLinkedListTest {
         assertEquals("corner case remove the second object", "[BEB, BIB]", list.toString());
         assertEquals("corner case removing wrong object", false, list.remove("E"));
         assertEquals("object count", 2, list.size());
+        list.remove("BIB");
+        asssertEquals("[BEB]", list.toString());
     }
 
     @Test
