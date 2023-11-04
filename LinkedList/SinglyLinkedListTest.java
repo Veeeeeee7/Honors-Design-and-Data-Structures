@@ -35,6 +35,9 @@ public class SinglyLinkedListTest {
         SinglyLinkedList<String> list3 = new SinglyLinkedList<>();
         list3.add(null);
         assertEquals("[null]", list3.toString());
+        SinglyLinkedList<String> list4 = new SinglyLinkedList<>();
+        list4.add("FIRST");
+        assertEquals("[FIRST]", list4.toString());
     }
 
     @Test
@@ -55,7 +58,13 @@ public class SinglyLinkedListTest {
                 "[EL, BAB, BEB, EL, BIB, BOB, BUB, MINUS 1, EL]",
                 list.toString());
         try {
-            list.add(-2, "E");
+            list.add(-1, "E");
+        } catch (Exception e) {
+            assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
+        }
+        assertEquals(9, list.size());
+        try {
+            list.add(10, "E");
         } catch (Exception e) {
             assertEquals("not the right exception is thrown", e.toString(), "java.lang.IndexOutOfBoundsException");
         }
@@ -151,6 +160,7 @@ public class SinglyLinkedListTest {
         list4.add("A");
         list4.add(null);
         list4.add("B");
+
         assertEquals(1, list4.indexOf(null));
     }
 
