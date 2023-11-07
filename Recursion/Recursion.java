@@ -85,7 +85,7 @@ public class Recursion {
 	// "cab", "cba"
 	// Order is your choice
 	public static void permute(String str) {
-
+		permuteHelper(str, 0);
 	}
 
 	private static void permuteHelper(String str, int index) {
