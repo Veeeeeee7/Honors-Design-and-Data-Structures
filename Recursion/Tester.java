@@ -28,5 +28,13 @@ public class Tester {
 
         // System.out.println(Recursion.waysToJumpUpStairs(4));
 
+        // Recursion.permute("abc");
+
+        int[] arr = { 12, 24, 35, 13, 2 };
+        Recursion.mergeSort(arr);
+        for (int i : arr) {
+            System.out.println(i);
+        }
+
     }
 }

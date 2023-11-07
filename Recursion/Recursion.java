@@ -88,7 +88,7 @@ public class Recursion {
 
 	}
 
-	private static void permute(String str, int swap) {
+	private static void permuteHelper(String str, int index) {
 
 	}
 
@@ -103,7 +103,63 @@ public class Recursion {
 
 	// Performs a mergeSort on the given array of ints
 	public static void mergeSort(int[] ints) {
+		mergeSortHelper(ints, 0, ints.length);
+	}
 
+	private static void mergeSortHelper(int[] ints, int left, int right) {
+		if (right - left <= 1) {
+			return;
+		}
+
+		int mid = (left + right) / 2;
+		mergeSortHelper(ints, left, mid);
+		mergeSortHelper(ints, mid, right);
+		merge(ints, left, right, mid);
+	}
+
+	private static void merge(int[] ints, int left, int right, int mid) {
+		if (right - left == 0) {
+			return;
+		}
+		if (right - left == 1) {
+			if (ints[left] > ints[right]) {
+				int temp = ints[right];
+				ints[right] = ints[left];
+				ints[left] = temp;
+			}
+			return;
+		}
+
+		int[] temp = new int[right - left];
+		int i = left;
+		int j = mid;
+		int index = 0;
+		while (i < mid && j < right) {
+			if (ints[i] < ints[j]) {
+				temp[index] = ints[i];
+				i++;
+			} else {
+				temp[index] = ints[j];
+				j++;
+			}
+			index++;
+		}
+		while (i < mid) {
+			temp[index] = ints[i];
+			index++;
+			i++;
+		}
+		while (j < right) {
+			temp[index] = ints[j];
+			index++;
+			j++;
+		}
+
+		int tempIndex = 0;
+		for (int k = left; k < right; k++) {
+			ints[k] = temp[tempIndex];
+			tempIndex++;
+		}
 	}
 
 	// OPTIONAL BONUS!!!!!!!!
