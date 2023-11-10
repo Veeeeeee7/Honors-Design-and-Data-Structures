@@ -1,5 +1,18 @@
 public class Tester {
     public static void main(String[] args) {
+        // String[][] grid = { { "----------", "vaccinated", "----------", "----------",
+        // "----------" },
+        // { "vaccinated", "----------", "----------", "----------", "----------" },
+        // { "----------", "----------", "vaccinated", "vaccinated", "vaccinated" },
+        // { "----------", "----------", "----------", "vaccinated", "----------" } };
+        // Recursion.infect(grid, 1, 2);
+        // for (int r = 0; r < grid.length; r++) {
+        // for (int c = 0; c < grid[r].length; c++) {
+        // System.out.print(grid[r][c] + " ");
+        // }
+        // System.out.println();
+        // }
+
         // ListNode n1 = new ListNode("FIRSRT");
         // ListNode n2 = new ListNode("SECOND");
         // ListNode n3 = new ListNode("THIRD");
@@ -30,11 +43,13 @@ public class Tester {
 
         // Recursion.permute("abc");
 
-        int[] arr = { 12, 24, 35, 13, 2 };
-        Recursion.mergeSort(arr);
-        for (int i : arr) {
-            System.out.println(i);
-        }
+        Recursion.subsets("abc");
+
+        // int[] arr = { 12, 24, 35, 13, 2 };
+        // Recursion.mergeSort(arr);
+        // for (int i : arr) {
+        // System.out.println(i);
+        // }
 
     }
 }

@@ -18,21 +18,31 @@ public class Recursion {
 	// them as well etc.
 	// Infecting someone who is already infected has no effect
 	public static void infect(String[][] grid, int r, int c) {
-		if (r >= grid[c].length || r < 0 || c >= grid.length || c < 0) {
+		if (c > grid[r].length - 1 || r < 0 || r > grid.length - 1 || c < 0) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (grid[r][c].equals("vaccinated")) {
 			return;
 		}
 		grid[r][c] = "infected";
-		if (r < grid[c].length - 1 && !grid[r + 1][c].equals("infected")) {
+		// for (int r1 = 0; r1 < grid.length; r1++) {
+		// for (int c1 = 0; c1 < grid[r1].length; c1++) {
+		// System.out.print(grid[r1][c1] + " ");
+		// }
+		// System.out.println();
+		// }
+		// System.out.println();
+		// System.out.println("r: " + r + " c: " + c);
+		// System.out.println(grid.length);
+		// System.out.println(grid[c].length);
+		if (r < grid.length - 1 && !grid[r + 1][c].equals("infected")) {
 			infect(grid, r + 1, c);
 		}
 		if (r > 0 && !grid[r - 1][c].equals("infected")) {
 			infect(grid, r - 1, c);
 		}
 
-		if (c < grid.length - 1 && !grid[r][c + 1].equals("infected")) {
+		if (c < grid[r].length - 1 && !grid[r][c + 1].equals("infected")) {
 			infect(grid, r, c + 1);
 		}
 
@@ -89,7 +99,28 @@ public class Recursion {
 	}
 
 	private static void permuteHelper(String str, int index) {
+		if (index == str.length()) {
+			System.out.println(str);
+			return;
+		}
+		for (int i = index; i < str.length(); i++) {
+			permuteHelper(swap(str, i, index), index + 1);
+		}
+	}
 
+	public static String swap(String str, int i, int j) {
+		StringBuilder newStr = new StringBuilder();
+		char[] chars = str.toCharArray();
+		for (int k = 0; k < chars.length; k++) {
+			if (k == i) {
+				newStr.append(chars[j]);
+			} else if (k == j) {
+				newStr.append(chars[i]);
+			} else {
+				newStr.append(chars[k]);
+			}
+		}
+		return newStr.toString();
 	}
 
 	// Prints all the subsets of str on separate lines
@@ -98,6 +129,20 @@ public class Recursion {
 	// "bc", "abc"
 	// Order is your choice
 	public static void subsets(String str) {
+		System.out.println("");
+		subsetsHelper("", str);
+		System.out.println(str);
+	}
+
+	public static void subsetsHelper(String current, String original) {
+		if (original.equals("")) {
+			return;
+		}
+		System.out.println(current);
+		for (int i = 0; i < original.length(); i++) {
+			subsetsHelper(current + original.charAt(i),
+					original.substring(0, i) + original.substring(i + 1, original.length()));
+		}
 
 	}
 
