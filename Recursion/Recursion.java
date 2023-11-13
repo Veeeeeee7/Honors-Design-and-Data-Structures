@@ -229,6 +229,8 @@ public class Recursion {
 	}
 
 	// move n disks from origin to target tower using the pivot tower
+	// first go from origin to the pivot using the target
+	// then go from pivot to target using the origin
 	private static void hanoiHelper(int n, int origin, int target, int pivot) {
 		if (n == 1) {
 			System.out.println(origin + "->" + target);
@@ -259,7 +261,14 @@ public class Recursion {
 	// time 9
 	// for a total of 20 points, so it would return 20.
 	public static int scavHunt(int[] times, int[] points) {
-		return 7;
+		return scavHuntHelper(times, points, 0, 0);
 	}
 
+	private static int scavHuntHelper(int[] times, int[] points, int score, int index) {
+		if (index > points.length - 1) {
+			return score;
+		}
+		score += scavHuntHelper(times, points, score, index + 1);
+		return score;
+	}
 }
