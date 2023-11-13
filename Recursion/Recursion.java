@@ -98,6 +98,8 @@ public class Recursion {
 		permuteHelper(str, 0);
 	}
 
+	// takes in a string and an index to start swapping at and then keep swapping
+	// letters until the end of the string
 	private static void permuteHelper(String str, int index) {
 		if (index == str.length()) {
 			System.out.println(str);
@@ -108,7 +110,9 @@ public class Recursion {
 		}
 	}
 
-	public static String swap(String str, int i, int j) {
+	// takes in a string and 2 indexes and returns a string with the characters in
+	// those 2 indexes swaped
+	private static String swap(String str, int i, int j) {
 		StringBuilder newStr = new StringBuilder();
 		char[] chars = str.toCharArray();
 		for (int k = 0; k < chars.length; k++) {
@@ -129,7 +133,7 @@ public class Recursion {
 	// "bc", "abc"
 	// Order is your choice
 	public static void subsets(String str) {
-		System.out.println("");
+		// System.out.println("");
 		subsetsHelper("", str);
 		System.out.println(str);
 	}
@@ -221,7 +225,13 @@ public class Recursion {
 	// the form "1 -> 2", meaning "take the top disk of tower 1 and
 	// put it on tower 2" etc.
 	public static void solveHanoi(int n) {
+		hanoiHelper(n, 0, 2, 1);
+	}
 
+	// move n disks from origin to target tower using the pivot tower
+	private static void hanoiHelper(int n, int origin, int target, int pivot) {
+		hanoiHelper(n - 1, origin, pivot, target);
+		hanoiHelper(n - 1, pivot, target, origin);
 	}
 
 	// You are partaking in a scavenger hunt!
