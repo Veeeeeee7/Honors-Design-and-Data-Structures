@@ -230,7 +230,12 @@ public class Recursion {
 
 	// move n disks from origin to target tower using the pivot tower
 	private static void hanoiHelper(int n, int origin, int target, int pivot) {
+		if (n == 1) {
+			System.out.println(origin + "->" + target);
+			return;
+		}
 		hanoiHelper(n - 1, origin, pivot, target);
+		System.out.println(origin + "->" + target);
 		hanoiHelper(n - 1, pivot, target, origin);
 	}
 

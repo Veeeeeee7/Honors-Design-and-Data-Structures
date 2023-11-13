@@ -1,5 +1,17 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class Tester {
     public static void main(String[] args) {
+        int n = 3;
+        String solution = "0 -> 2\n"
+                + "0 -> 1\n"
+                + "2 -> 1\n"
+                + "0 -> 2\n"
+                + "1 -> 0\n"
+                + "1 -> 2\n"
+                + "0 -> 2\n";
+        Recursion.solveHanoi(n);
+        System.out.println("\nSOLUTION:\n" + solution);
         // String[][] grid = { { "----------", "vaccinated", "----------", "----------",
         // "----------" },
         // { "vaccinated", "----------", "----------", "----------", "----------" },
@@ -43,7 +55,7 @@ public class Tester {
 
         // Recursion.permute("abc");
 
-        Recursion.subsets("abc");
+        // Recursion.subsets("abc");
 
         // int[] arr = { 12, 24, 35, 13, 2 };
         // Recursion.mergeSort(arr);
