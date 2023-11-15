@@ -233,7 +233,7 @@ public class Recursion {
 	// then go from pivot to target using the origin
 	private static void hanoiHelper(int n, int origin, int target, int pivot) {
 		if (n == 1) {
-			System.out.println(origin + "->" + target);
+			System.out.println(origin + " -> " + target);
 			return;
 		}
 		hanoiHelper(n - 1, origin, pivot, target);
