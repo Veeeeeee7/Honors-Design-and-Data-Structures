@@ -261,14 +261,20 @@ public class Recursion {
 	// time 9
 	// for a total of 20 points, so it would return 20.
 	public static int scavHunt(int[] times, int[] points) {
-		return scavHuntHelper(times, points, 0, 0);
+		return scavHuntHelper(times, points, 0);
 	}
 
-	private static int scavHuntHelper(int[] times, int[] points, int score, int index) {
+	// returns max points possible if we have the part of the array starting with
+	// index
+	private static int scavHuntHelper(int[] times, int[] points, int index) {
 		if (index > points.length - 1) {
-			return score;
+			return 0;
 		}
-		score += scavHuntHelper(times, points, score, index + 1);
-		return score;
+
+		int noSkipScore = 0;
+		int skipScore = 0;
+		noSkipScore += scavHuntHelper(times, points, index + 1);
+		skipScore += scavHuntHelper(times, points, index + 1);
+		return skipScore > noSkipScore ? skipScore : noSkipScore;
 	}
 }
