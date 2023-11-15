@@ -237,7 +237,7 @@ public class Recursion {
 			return;
 		}
 		hanoiHelper(n - 1, origin, pivot, target);
-		System.out.println(origin + "->" + target);
+		System.out.println(origin + " -> " + target);
 		hanoiHelper(n - 1, pivot, target, origin);
 	}
 
@@ -261,20 +261,45 @@ public class Recursion {
 	// time 9
 	// for a total of 20 points, so it would return 20.
 	public static int scavHunt(int[] times, int[] points) {
-		return scavHuntHelper(times, points, 0);
+		if (points.length == 0) {
+			return 0;
+		}
+		if (points.length == 1) {
+			return points[0];
+		}
+
+		int noSkip = scavHuntHelper(times, points, 0);
+		int skip = scavHuntHelper(times, points, 1);
+		return Math.max(noSkip, skip);
 	}
 
 	// returns max points possible if we have the part of the array starting with
 	// index
 	private static int scavHuntHelper(int[] times, int[] points, int index) {
-		if (index > points.length - 1) {
-			return 0;
+		if (index >= points.length - 1) {
+			return points[points.length - 1];
 		}
 
-		int noSkipScore = 0;
-		int skipScore = 0;
-		noSkipScore += scavHuntHelper(times, points, index + 1);
-		skipScore += scavHuntHelper(times, points, index + 1);
-		return skipScore > noSkipScore ? skipScore : noSkipScore;
+		int noSkipScore = points[index];
+		int skipNextScore = points[index];
+		int skipScore = scavHuntHelper(times, points, index + 1);
+
+		if (times[index + 1] - times[index] >= 5) {
+			noSkipScore += scavHuntHelper(times, points, index + 1);
+		}
+		if (nextEvent(times, index) != -1) {
+			skipNextScore += scavHuntHelper(times, points, nextEvent(times, index));
+		}
+
+		return Math.max(noSkipScore, Math.max(skipNextScore, skipScore));
+	}
+
+	private static int nextEvent(int[] times, int index) {
+		for (int i = index; i < times.length; i++) {
+			if (times[i] - times[index] >= 5) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

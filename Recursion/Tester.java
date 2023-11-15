@@ -1,8 +1,11 @@
 public class Tester {
     public static void main(String[] args) {
-        int[] times = { 6, 7, 12, 14, 16, 18, 20, 22, 23, 25 };
-        int[] points = { 5, 6, 5, 1, 3, 4, 7, 4, 5, 3 };
-        System.out.println(Recursion.scavHunt(times, points));
+        Recursion.subsets("hum");
+        // int[] times = { 6, 7, 12, 14, 16, 18, 20, 22, 23, 25 };
+        // int[] points = { 5, 6, 5, 1, 3, 4, 7, 4, 5, 3 };
+        // System.out.println(Recursion.scavHunt(times, points));
+        // System.out.println(5 + 5 + 4 + 5);
+        // System.out.println(6 + 5 + 4 + 5);
         // int n = 3;
         // String solution = "0 -> 2\n"
         // + "0 -> 1\n"

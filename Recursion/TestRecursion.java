@@ -165,29 +165,29 @@ class TestRecursion {
 		}
 	}
 
-	// @Test
-	// @DisplayName("[5] Test mergeSort.")
-	// public void testMergeSort() {
-	// int[] arr = {3, 7, 18, 2, 1, 20, 5, 8, 16, 0};
-	// Recursion.mergeSort(arr);
-	// int[] arr2 = {0, 1, 2, 3, 5, 7, 8, 16, 18, 20};
-	// for (int i = 0; i < arr.length; i++) {
-	// assertEquals(arr2[i], arr[i]);
-	// }
-	//
-	// }
-
 	@Test
-	@DisplayName("[5] Test quickSort.")
-	public void testQuickSort() {
+	@DisplayName("[5] Test mergeSort.")
+	public void testMergeSort() {
 		int[] arr = { 3, 7, 18, 2, 1, 20, 5, 8, 16, 0 };
-		Recursion.quickSort(arr);
+		Recursion.mergeSort(arr);
 		int[] arr2 = { 0, 1, 2, 3, 5, 7, 8, 16, 18, 20 };
 		for (int i = 0; i < arr.length; i++) {
 			assertEquals(arr2[i], arr[i]);
 		}
 
 	}
+
+	// @Test
+	// @DisplayName("[5] Test quickSort.")
+	// public void testQuickSort() {
+	// int[] arr = { 3, 7, 18, 2, 1, 20, 5, 8, 16, 0 };
+	// Recursion.quickSort(arr);
+	// int[] arr2 = { 0, 1, 2, 3, 5, 7, 8, 16, 18, 20 };
+	// for (int i = 0; i < arr.length; i++) {
+	// assertEquals(arr2[i], arr[i]);
+	// }
+
+	// }
 
 	@Test
 	@DisplayName("[5] Test solveHanoi.")
