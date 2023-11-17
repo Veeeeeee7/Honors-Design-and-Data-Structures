@@ -1,6 +1,16 @@
 public class Tester {
     public static void main(String[] args) {
-        Recursion.subsets("hum");
+        int[] times = { 2, 5, 8, 11 };
+        int[] points = { 5, 10, 15, 20 };
+        System.out.println(Recursion.scavHunt(times, points));
+        // ListNode head = new ListNode("Anglerfish");
+        // ListNode node = head;
+        // for (int i = 0; i < 5; i++) {
+        // node.setNext(new ListNode("" + i + i * i));
+        // node = node.getNext();
+        // }
+        // Recursion.reverseList(head);
+        // Recursion.subsets("hum");
         // int[] times = { 6, 7, 12, 14, 16, 18, 20, 22, 23, 25 };
         // int[] points = { 5, 6, 5, 1, 3, 4, 7, 4, 5, 3 };
         // System.out.println(Recursion.scavHunt(times, points));

@@ -135,19 +135,21 @@ public class Recursion {
 	public static void subsets(String str) {
 		// System.out.println("");
 		subsetsHelper("", str);
-		System.out.println(str);
+		// System.out.println(str);
 	}
 
+	// takes in the original string you are cutting from and the current string you
+	// have
+	// each time the first character of the original string is cut off
+	// 2 recursive calls are made that explore the subsets with and without the cut
+	// off character as part of the subset
 	public static void subsetsHelper(String current, String original) {
 		if (original.equals("")) {
-			return;
+			System.out.println(current);
+		} else {
+			subsetsHelper(current + original.substring(0, 1), original.substring(1));
+			subsetsHelper(current, original.substring(1));
 		}
-		System.out.println(current);
-		for (int i = 0; i < original.length(); i++) {
-			subsetsHelper(current + original.charAt(i),
-					original.substring(0, i) + original.substring(i + 1, original.length()));
-		}
-
 	}
 
 	// Performs a mergeSort on the given array of ints
@@ -155,6 +157,8 @@ public class Recursion {
 		mergeSortHelper(ints, 0, ints.length);
 	}
 
+	// splits the array by halfs going forward
+	// merge the sorted sections going backwards
 	private static void mergeSortHelper(int[] ints, int left, int right) {
 		if (right - left <= 1) {
 			return;
@@ -166,6 +170,7 @@ public class Recursion {
 		merge(ints, left, right, mid);
 	}
 
+	// merges 2 sorted subsections of the array
 	private static void merge(int[] ints, int left, int right, int mid) {
 		if (right - left == 0) {
 			return;
@@ -268,32 +273,32 @@ public class Recursion {
 			return points[0];
 		}
 
-		int noSkip = scavHuntHelper(times, points, 0);
-		int skip = scavHuntHelper(times, points, 1);
-		return Math.max(noSkip, skip);
+		// int noSkip = scavHuntHelper(times, points, 0, 0, 0);
+		// int skip = scavHuntHelper(times, points, 0, 1, 1);
+		// return Math.max(noSkip, skip);
+
+		return scavHuntHelper(times, points, 0, 0, -1);
 	}
 
 	// returns max points possible if we have the part of the array starting with
 	// index
-	private static int scavHuntHelper(int[] times, int[] points, int index) {
-		if (index >= points.length - 1) {
-			return points[points.length - 1];
+	private static int scavHuntHelper(int[] times, int[] points, int score, int index, int previous) {
+		if (index > points.length - 1) {
+			// return points[points.length - 1];
+			return score;
 		}
 
-		int noSkipScore = points[index];
-		int skipNextScore = points[index];
-		int skipScore = scavHuntHelper(times, points, index + 1);
+		int noSkipScore = previous < 0 || index == 0 || times[index] - times[previous] >= 5
+				? scavHuntHelper(times, points, score + points[index], index + 1, index)
+				: 0;
+		System.out.println("NOSKIP: " + noSkipScore);
+		int skipScore = scavHuntHelper(times, points, score, index + 1, previous);
+		System.out.println("SKIP: " + skipScore);
 
-		if (times[index + 1] - times[index] >= 5) {
-			noSkipScore += scavHuntHelper(times, points, index + 1);
-		}
-		if (nextEvent(times, index) != -1) {
-			skipNextScore += scavHuntHelper(times, points, nextEvent(times, index));
-		}
-
-		return Math.max(noSkipScore, Math.max(skipNextScore, skipScore));
+		return Math.max(noSkipScore, skipScore);
 	}
 
+	// finds the index of the next possible event
 	private static int nextEvent(int[] times, int index) {
 		for (int i = index; i < times.length; i++) {
 			if (times[i] - times[index] >= 5) {
