@@ -72,7 +72,7 @@ public class Recursion {
 	// Jumping 1-1-2 is considered different than jumping 1-2-1
 	public static long waysToJumpUpStairs(int n) {
 		if (n == 0) {
-			return 0;
+			return 1;
 		}
 		if (n == 1) {
 			return 1;
