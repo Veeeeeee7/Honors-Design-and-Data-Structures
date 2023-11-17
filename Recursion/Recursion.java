@@ -78,7 +78,7 @@ public class Recursion {
 			return 1;
 		}
 		if (n == 2) {
-			return 1;
+			return 2;
 		}
 		long count = 0;
 		if (n == 1) {
@@ -302,7 +302,6 @@ public class Recursion {
 
 	// returns max points possible if we have the part of the array starting with
 	// index
-
 	// previous is used to keep track of the time from the previous time points were
 	// taken
 	// previous starts at -1 to allow for the first points to be taken at anytime
