@@ -19,7 +19,7 @@ public class Recursion {
 	// Infecting someone who is already infected has no effect
 	public static void infect(String[][] grid, int r, int c) {
 		if (c > grid[r].length - 1 || r < 0 || r > grid.length - 1 || c < 0) {
-			throw new IndexOutOfBoundsException();
+			return;
 		}
 		if (grid[r][c].equals("vaccinated")) {
 			return;
@@ -72,6 +72,12 @@ public class Recursion {
 	// Jumping 1-1-2 is considered different than jumping 1-2-1
 	public static long waysToJumpUpStairs(int n) {
 		if (n == 0) {
+			return 0;
+		}
+		if (n == 1) {
+			return 1;
+		}
+		if (n == 2) {
 			return 1;
 		}
 		long count = 0;
@@ -95,6 +101,10 @@ public class Recursion {
 	// "cab", "cba"
 	// Order is your choice
 	public static void permute(String str) {
+		if (str.equals("")) {
+			System.out.println("");
+			return;
+		}
 		permuteHelper(str, 0);
 	}
 
@@ -133,6 +143,10 @@ public class Recursion {
 	// "bc", "abc"
 	// Order is your choice
 	public static void subsets(String str) {
+		if (str.equals("")) {
+			System.out.println("");
+			return;
+		}
 		// System.out.println("");
 		subsetsHelper("", str);
 		// System.out.println(str);
@@ -154,6 +168,9 @@ public class Recursion {
 
 	// Performs a mergeSort on the given array of ints
 	public static void mergeSort(int[] ints) {
+		if (ints.length == 0) {
+			return;
+		}
 		mergeSortHelper(ints, 0, ints.length);
 	}
 
@@ -230,6 +247,9 @@ public class Recursion {
 	// the form "1 -> 2", meaning "take the top disk of tower 1 and
 	// put it on tower 2" etc.
 	public static void solveHanoi(int n) {
+		if (n <= 0) {
+			return;
+		}
 		hanoiHelper(n, 0, 2, 1);
 	}
 
@@ -282,6 +302,10 @@ public class Recursion {
 
 	// returns max points possible if we have the part of the array starting with
 	// index
+
+	// previous is used to keep track of the time from the previous time points were
+	// taken
+	// previous starts at -1 to allow for the first points to be taken at anytime
 	private static int scavHuntHelper(int[] times, int[] points, int score, int index, int previous) {
 		if (index > points.length - 1) {
 			// return points[points.length - 1];

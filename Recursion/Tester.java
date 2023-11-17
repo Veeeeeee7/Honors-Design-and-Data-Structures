@@ -1,8 +1,20 @@
 public class Tester {
     public static void main(String[] args) {
-        int[] times = { 2, 5, 8, 11 };
-        int[] points = { 5, 10, 15, 20 };
-        System.out.println(Recursion.scavHunt(times, points));
+        Recursion.solveHanoi(-10);
+        // int[] arr = new int[3];
+        // arr[0] = 1;
+        // arr[1] = -5;
+        // arr[2] = -25;
+        // Recursion.mergeSort(arr);
+        // for (int i : arr) {
+        // System.out.println(i);
+        // }
+        // Recursion.subsets("");
+        // Recursion.permute("abcdef");
+        // System.out.println(Recursion.waysToJumpUpStairs(0));
+        // int[] times = { 2, 5, 8, 11 };
+        // int[] points = { 5, 10, 15, 20 };
+        // System.out.println(Recursion.scavHunt(times, points));
         // ListNode head = new ListNode("Anglerfish");
         // ListNode node = head;
         // for (int i = 0; i < 5; i++) {
