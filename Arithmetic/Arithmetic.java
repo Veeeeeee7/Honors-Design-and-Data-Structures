@@ -1,5 +1,6 @@
 import java.util.ArrayDeque;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Arithmetic {
 
@@ -56,7 +57,35 @@ public class Arithmetic {
 	}
 
 	public static String convertClassicToStout(String exp) {
-		return "";
+		Scanner scanner = new Scanner(exp);
+		StringBuilder stoutExp = new StringBuilder();
+		ArrayDeque<Character> dq = new ArrayDeque<>();
+
+		while (scanner.hasNext()) {
+			if (scanner.hasNextInt()) {
+				stoutExp.append(scanner.next() + " ");
+				continue;
+			}
+
+			char next = scanner.next().charAt(0);
+			if (next == ')') {
+				// for (char c : dq) {
+				// System.out.println(c);
+				// }
+				// System.out.println();
+
+				while (!dq.isEmpty() && dq.peek() != '(') {
+					stoutExp.append(dq.pop() + " ");
+				}
+				dq.pop();
+			} else {
+				dq.push(next);
+			}
+		}
+
+		scanner.close();
+		stoutExp.deleteCharAt(stoutExp.length() - 1);
+		return stoutExp.toString();
 	}
 
 }
