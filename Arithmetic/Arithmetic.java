@@ -6,7 +6,7 @@ public class Arithmetic {
 	// Evaluates a String exp that has an arithmetic expression, written in classic
 	// notation
 	public static int evaluate(String exp) {
-		return 0;
+		return evaluateStout(convertClassicToStout(exp));
 	}
 
 	// Returns the result of doing operand1 operation operand2,
@@ -27,12 +27,32 @@ public class Arithmetic {
 		return 0;
 	}
 
+	private static int operateFlipped(int operand2, int operand1, String operation) {
+		if (operation.equals("+")) {
+			return operand1 + operand2;
+		}
+		if (operation.equals("-")) {
+			return operand1 - operand2;
+		}
+		if (operation.equals("*")) {
+			return operand1 * operand2;
+		}
+		if (operation.equals("/")) {
+			return operand1 / operand2;
+		}
+		return 0;
+	}
+
 	// Evaluates a String exp that has an arithmetic expression written in STOUT
 	// notation
 	public static int evaluateStout(String exp) {
 		Scanner scanner = new Scanner(exp);
-		ArrayDeque<Character> deque = new ArrayDeque<>();
-		return 0;
+		ArrayDeque<Integer> dq = new ArrayDeque<>();
+		while (scanner.hasNext()) {
+			dq.push(scanner.hasNextInt() ? scanner.nextInt() : operateFlipped(dq.pop(), dq.pop(), scanner.next()));
+		}
+		scanner.close();
+		return dq.peek();
 	}
 
 	public static String convertClassicToStout(String exp) {
