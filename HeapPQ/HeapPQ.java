@@ -136,6 +136,10 @@ public class HeapPQ<E extends Comparable<E>> implements MyPriorityQueue<E> {
 
 	// Removes and returns the MINIMUM element from the Priority Queue
 	public E removeMin() {
+		if (objectCount == 0) {
+			throw new NoSuchElementException();
+		}
+
 		E temp = heap[0];
 		swap(0, objectCount - 1);
 		heap[objectCount - 1] = null;
