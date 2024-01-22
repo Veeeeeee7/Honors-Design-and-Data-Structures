@@ -124,7 +124,33 @@ public class CookieMonster {
 	 * down
 	 */
 	public int stackCookies() {
-		return 0;
+		ArrayDeque<OrphanScout> stack = new ArrayDeque<OrphanScout>();
+		int max = 0;
+		if (cookieGrid[0][0] < 0) {
+			return 0;
+		}
+
+		stack.addFirst(new OrphanScout(0, 0, cookieGrid[0][0]));
+		max = cookieGrid[0][0];
+
+		while (!stack.isEmpty()) {
+			OrphanScout current = stack.removeFirst();
+			int r = current.getEndingRow();
+			int c = current.getEndingCol();
+			int count = current.getCookiesDiscovered();
+			int right = get(r, c + 1);
+			int down = get(r + 1, c);
+
+			if (right >= 0) {
+				stack.addFirst(new OrphanScout(r, c + 1, count + right));
+				max = Math.max(max, count + right);
+			}
+			if (down >= 0) {
+				stack.addFirst(new OrphanScout(r + 1, c, count + down));
+				max = Math.max(max, count + down);
+			}
+		}
+		return max;
 	}
 
 	/*

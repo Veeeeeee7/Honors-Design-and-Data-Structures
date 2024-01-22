@@ -3,5 +3,6 @@ public class tester {
         CookieMonster c = new CookieMonster("factory");
         System.out.println(c.recursiveCookies());
         System.out.println(c.queueCookies());
+        System.out.println(c.stackCookies());
     }
 }
