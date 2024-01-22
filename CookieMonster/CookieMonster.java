@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayDeque;
+import java.util.PriorityQueue;
 
 /* You are allowed (and expected!) to use either Java's ArrayDeque or LinkedList class to make stacks and queues,
  * and Java's PriorityQueue class to make a priority queue */
@@ -162,7 +163,33 @@ public class CookieMonster {
 	 * down
 	 */
 	public int pqCookies() {
-		return 0;
-	}
+		PriorityQueue<OrphanScout> pq = new PriorityQueue<OrphanScout>();
+		int max = 0;
 
+		if (cookieGrid[0][0] < 0) {
+			return 0;
+		}
+
+		pq.add(new OrphanScout(0, 0, cookieGrid[0][0]));
+		max = cookieGrid[0][0];
+
+		while (!pq.isEmpty()) {
+			OrphanScout current = pq.remove();
+			int r = current.getEndingRow();
+			int c = current.getEndingCol();
+			int count = current.getCookiesDiscovered();
+			int right = get(r, c + 1);
+			int down = get(r + 1, c);
+
+			if (right >= 0) {
+				pq.add(new OrphanScout(r, c + 1, count + right));
+				max = Math.max(max, count + right);
+			}
+			if (down >= 0) {
+				pq.add(new OrphanScout(r + 1, c, count + down));
+				max = Math.max(max, count + down);
+			}
+		}
+		return max;
+	}
 }

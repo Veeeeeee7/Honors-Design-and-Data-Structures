@@ -4,5 +4,6 @@ public class tester {
         System.out.println(c.recursiveCookies());
         System.out.println(c.queueCookies());
         System.out.println(c.stackCookies());
+        System.out.println(c.pqCookies());
     }
 }
