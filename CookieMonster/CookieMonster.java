@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.Scanner;
+import java.util.ArrayDeque;
 
 /* You are allowed (and expected!) to use either Java's ArrayDeque or LinkedList class to make stacks and queues,
  * and Java's PriorityQueue class to make a priority queue */
@@ -70,6 +71,10 @@ public class CookieMonster {
 
 	}
 
+	private int get(int r, int c) {
+		return r >= numRows || c >= numCols || cookieGrid[r][c] < 0 ? -1 : cookieGrid[r][c];
+	}
+
 	/*
 	 * Calculate which route grants the most cookies using a QUEUE.
 	 * Returns the maximum number of cookies attainable.
@@ -79,7 +84,35 @@ public class CookieMonster {
 	 * down
 	 */
 	public int queueCookies() {
-		return 0;
+		ArrayDeque<OrphanScout> queue = new ArrayDeque<OrphanScout>();
+		int max = 0;
+
+		if (cookieGrid[0][0] < 0) {
+			return 0;
+		}
+
+		queue.addLast(new OrphanScout(0, 0, cookieGrid[0][0]));
+		max = cookieGrid[0][0];
+
+		while (!queue.isEmpty()) {
+			OrphanScout current = queue.removeFirst();
+			int r = current.getEndingRow();
+			int c = current.getEndingCol();
+			int count = current.getCookiesDiscovered();
+			int right = get(r, c + 1);
+			int down = get(r + 1, c);
+
+			if (right >= 0) {
+				queue.addLast(new OrphanScout(r, c + 1, count + right));
+				max = Math.max(max, count + right);
+			}
+			if (down >= 0) {
+				queue.addLast(new OrphanScout(r + 1, c, count + down));
+				max = Math.max(max, count + down);
+			}
+		}
+
+		return max;
 	}
 
 	/*
