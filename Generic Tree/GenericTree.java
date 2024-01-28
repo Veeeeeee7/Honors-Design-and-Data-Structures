@@ -50,9 +50,6 @@ public class GenericTree {
 		if (node.getValue().equals(obj)) {
 			return true;
 		}
-		if (node.getChildren() == null) {
-			return false;
-		}
 
 		ArrayList<TreeNode> children = node.getChildren();
 
@@ -72,16 +69,57 @@ public class GenericTree {
 
 	public String toStringStack() {
 		// Use a stack to do the toString
-		return "";
+		ArrayDeque<TreeNode> stack = new ArrayDeque<>();
+		if (root == null) {
+			return "";
+		}
+		stack.addFirst(root);
+		StringBuilder sb = new StringBuilder();
+
+		while (!stack.isEmpty()) {
+			TreeNode current = stack.removeFirst();
+			ArrayList<TreeNode> children = current.getChildren();
+			sb.append(current.toString() + "\n");
+			for (TreeNode node : children) {
+				stack.addFirst(node);
+			}
+		}
+		sb.deleteCharAt(sb.length() - 1);
+		return sb.toString();
 	}
 
 	public String toStringQueue() {
 		// Use a queue to do the toString
-		return "";
+		ArrayDeque<TreeNode> queue = new ArrayDeque<>();
+		if (root == null) {
+			return "";
+		}
+		queue.addLast(root);
+		StringBuilder sb = new StringBuilder();
+
+		while (!queue.isEmpty()) {
+			TreeNode current = queue.removeFirst();
+			ArrayList<TreeNode> children = current.getChildren();
+			sb.append(current.toString() + "\n");
+			for (TreeNode node : children) {
+				queue.addLast(node);
+			}
+		}
+		sb.deleteCharAt(sb.length() - 1);
+		return sb.toString();
 	}
 
 	public String toStringRecursion() {
 		// Use recursion to do the toString
-		return root.recursiveToString();
+		return recursionHelper(root);
+	}
+
+	private String recursionHelper(TreeNode node) {
+		ArrayList<TreeNode> children = node.getChildren();
+		StringBuilder sb = new StringBuilder(node.toString() + "\n");
+		for (TreeNode n : children) {
+			sb.append(recursionHelper(n));
+		}
+		return sb.toString();
 	}
 }
