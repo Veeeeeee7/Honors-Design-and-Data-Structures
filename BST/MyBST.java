@@ -15,7 +15,23 @@ public class MyBST<E extends Comparable<E>> {
 
 	// Returns true if this BST contains value; otherwise returns false.
 	public boolean contains(E value) {
+		return containsHelper(root, value);
+	}
 
+	private boolean containsHelper(BinaryNode<E> node, E value) {
+		E currentValue = node.getValue();
+		if (node.getValue().equals(value)) {
+			return true;
+		}
+		if (!node.hasChildren()) {
+			return false;
+		}
+		if (value.compareTo(currentValue) > 0) {
+			return containsHelper(node.getRight(), value);
+		} else if (value.compareTo(currentValue) < 0) {
+			return containsHelper(node.getLeft(), value);
+		}
+		return false;
 	}
 
 	// Adds value to this BST, unless this tree already holds value.
@@ -49,14 +65,29 @@ public class MyBST<E extends Comparable<E>> {
 	// Removes value from this BST. Returns true if value has been
 	// found and removed; otherwise returns false.
 	public boolean remove(E value) {
-
+		return false;
 	}
 
 	// Returns a bracket-surrounded, comma separated list of the contents of the
 	// nodes, in order
 	// e.g. ["Apple", "Cranberry", "Durian", "Mango"]
 	public String toString() {
-
+		return "[" + toStringHelper(root) + "]";
 	}
 
+	private String toStringHelper(BinaryNode<E> node) {
+		StringBuilder sb = new StringBuilder();
+		if (node == null) {
+			return "";
+		}
+
+		if (node.hasLeft()) {
+			sb.append(toStringHelper(node.getLeft()) + ", ");
+		}
+		sb.append(node.toString());
+		if (node.hasRight()) {
+			sb.append(", " + toStringHelper(node.getRight()));
+		}
+		return sb.toString();
+	}
 }
