@@ -9,7 +9,7 @@ public class tester {
         tree.add(0);
         tree.add(-1);
         tree.add(2);
-        tree.remove(2);
-        System.out.println(tree);
+        // tree.remove(2);
+        System.out.println(tree.contains(2));
     }
 }
