@@ -42,19 +42,20 @@ public class MyBST<E extends Comparable<E>> {
 	}
 
 	private boolean addHelper(BinaryNode<E> node, E value) {
+
 		E currentValue = node.getValue();
 		if (value.compareTo(currentValue) > 0) {
 			if (node.getRight() == null) {
 				node.setRight(new BinaryNode<E>(value));
 				return true;
 			}
-			addHelper(node.getRight(), value);
+			return addHelper(node.getRight(), value);
 		} else if (value.compareTo(currentValue) < 0) {
 			if (node.getLeft() == null) {
 				node.setLeft(new BinaryNode<E>(value));
 				return true;
 			}
-			addHelper(node.getLeft(), value);
+			return addHelper(node.getLeft(), value);
 		}
 		return false;
 	}
