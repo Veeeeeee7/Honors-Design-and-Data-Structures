@@ -53,13 +53,20 @@ public class MyHashMap<K, V> {
 	// Returns the current load factor (objCount / buckets)
 	public double currentLoadFactor() {
 		/* -- IMPLEMENT THIS -- */
-		return objectCount / buckets.length;
+		return (double) objectCount / buckets.length;
 	}
 
 	// Return true if the key exists as a key in the map, otherwise false.
 	// Use the .equals method to check equality.
 	public boolean containsKey(K key) {
 		/* -- IMPLEMENT THIS -- */
+		ListNode<KeyValue<K, V>> bucket = buckets[whichBucket(key)];
+		while (!bucket.getNext().isSentinel()) {
+			bucket = bucket.getNext();
+			if (bucket.getEntry().getKey().equals(key)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -67,6 +74,14 @@ public class MyHashMap<K, V> {
 	// Use the .equals method to check equality.
 	public boolean containsValue(V value) {
 		/* -- IMPLEMENT THIS -- */
+		for (ListNode<KeyValue<K, V>> bucket : buckets) {
+			while (!bucket.getNext().isSentinel()) {
+				bucket = bucket.getNext();
+				if (bucket.getEntry().getValue().equals(value)) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -78,10 +93,21 @@ public class MyHashMap<K, V> {
 	// - If so, you must call rehash with double the current bucket size.
 	public boolean put(K key, V value) {
 		/* -- IMPLEMENT THIS -- */
-		if (!buckets[whichBucket(key)].isSentinel()) {
+		if (containsKey(key)) {
 			return false;
 		}
-		buckets[whichBucket(key)] = new ListNode<KeyValue<K, V>>(new KeyValue<K, V>(key, value));
+		ListNode<KeyValue<K, V>> bucketSentinel = buckets[whichBucket(key)];
+		ListNode<KeyValue<K, V>> current = bucketSentinel;
+
+		while (!current.getNext().isSentinel()) {
+			current = current.getNext();
+		}
+		current.setNext(new ListNode<KeyValue<K, V>>(new KeyValue<K, V>(key, value), current, bucketSentinel));
+		objectCount++;
+
+		if (currentLoadFactor() > loadFactorLimit) {
+			rehash(buckets.length * 2);
+		}
 		return true;
 	}
 
@@ -89,14 +115,32 @@ public class MyHashMap<K, V> {
 	// If the key is not in the map, then return null.
 	public V get(K key) {
 		/* -- IMPLEMENT THIS -- */
-		return buckets[whichBucket(key)].getEntry().getValue();
+		ListNode<KeyValue<K, V>> bucket = buckets[whichBucket(key)];
+		while (!bucket.getNext().isSentinel()) {
+			bucket = bucket.getNext();
+			if (bucket.getEntry().getKey().equals(key)) {
+				return bucket.getEntry().getValue();
+			}
+		}
+		return null;
 	}
 
 	// Remove the pair associated with the key. Return true if successful, false if
 	// the key did not exist
 	public boolean remove(K key) {
 		/* -- IMPLEMENT THIS -- */
-		return true;
+		ListNode<KeyValue<K, V>> bucket = buckets[whichBucket(key)];
+		while (!bucket.getNext().isSentinel()) {
+			bucket = bucket.getNext();
+			if (bucket.getEntry().getKey().equals(key)) {
+				ListNode<KeyValue<K, V>> previous = bucket.getPrevious();
+				bucket.getNext().setPrevious(previous);
+				previous.setNext(bucket.getNext());
+				objectCount--;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// Rehash the map so that it contains the given number of buckets
@@ -108,6 +152,22 @@ public class MyHashMap<K, V> {
 	// followed by Z, then K.
 	public void rehash(int newBucketCount) {
 		/* -- IMPLEMENT THIS -- */
+		ListNode<KeyValue<K, V>>[] original = buckets;
+		buckets = (ListNode<KeyValue<K, V>>[]) new ListNode[newBucketCount];
+		fillArrayWithSentinels(buckets);
+		for (ListNode<KeyValue<K, V>> bucket : original) {
+			while (!bucket.getNext().isSentinel()) {
+				bucket = bucket.getNext();
+				ListNode<KeyValue<K, V>> newBucketSentinel = buckets[whichBucket(bucket.getEntry().getKey())];
+				ListNode<KeyValue<K, V>> current = newBucketSentinel;
+
+				while (!current.getNext().isSentinel()) {
+					current = current.getNext();
+				}
+				current.setNext(new ListNode<KeyValue<K, V>>(new KeyValue<K, V>(
+						bucket.getEntry().getKey(), bucket.getEntry().getValue()), current, newBucketSentinel));
+			}
+		}
 	}
 
 	// The output should be in the following format:
@@ -120,13 +180,20 @@ public class MyHashMap<K, V> {
 	// E.g. "[ 3, 10 | { b3: Andy,Stout Andrew,Theiss } { b7: Adam,Varney } ]"
 	public String toString() {
 		/* -- IMPLEMENT THIS -- */
-		StringBuilder sb = new StringBuilder();
-		for (ListNode<KeyValue<K, V>> node : buckets) {
-			if (!node.isSentinel()) {
-				sb.append(node.getEntry().getKey().toString() + " : " + node.getEntry().getValue().toString());
-				node = node.getNext();
+		StringBuilder sb = new StringBuilder("[ " + objectCount + ", " + buckets.length + " | ");
+		for (int i = 0; i < buckets.length; i++) {
+			ListNode<KeyValue<K, V>> node = buckets[i];
+			if (!node.getNext().isSentinel()) {
+				sb.append("{ b" + i + ": ");
+				while (!node.getNext().isSentinel()) {
+					node = node.getNext();
+					sb.append(node.getEntry().getKey().toString() + ","
+							+ node.getEntry().getValue().toString() + " ");
+				}
+				sb.append("} ");
 			}
 		}
+		sb.append("]");
 		return sb.toString();
 	}
 
