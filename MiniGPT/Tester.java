@@ -1,8 +1,12 @@
 public class Tester {
     public static void main(String[] args) throws Exception {
-        MiniGPT gpt = new MiniGPT("test", 3);
+        MiniGPT gpt = new MiniGPT("thegreatgatsby.txt", 2);
         // MiniGPT gpt = new MiniGPT("test", 2);
         // System.out.println(gpt);
-        gpt.generateText("output.txt", 100);
+
+        for (int i = 0; i < 10000; i++) {
+
+            gpt.generateText("output.txt", 500);
+        }
     }
 }
