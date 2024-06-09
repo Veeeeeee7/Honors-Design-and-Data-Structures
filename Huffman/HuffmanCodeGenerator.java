@@ -17,6 +17,7 @@ public class HuffmanCodeGenerator {
             while (br.ready()) {
                 frequencyList[br.read()]++;
             }
+            br.close();
 
         } catch (Exception e) {
             e.printStackTrace();

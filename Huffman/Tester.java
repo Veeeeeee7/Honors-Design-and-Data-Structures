@@ -11,10 +11,10 @@ public class Tester {
         // for (int i = 0; i < 128; i++) {
         // System.out.println((char) i + " : " + h.getFrequency((char) i));
         // }
-
+        HuffmanCodeGenerator cg = new HuffmanCodeGenerator("moby dick.txt");
         HuffmanEncoder h = new HuffmanEncoder("codes.txt");
         // h.encodeLong("frequencyCountInput.txt", "encoded.txt");
-        h.encodeFile("frequencyCountInput.txt");
+        h.encodeFile("moby dick.txt");
         // try {
         // BufferedReader br = new BufferedReader(new FileReader("encoded.txt"));
         // System.out.println(br.readLine().length());
@@ -23,6 +23,6 @@ public class Tester {
         // e.printStackTrace();
         // }
         HuffmanDecoder hd = new HuffmanDecoder("codes.txt");
-        hd.decodeFile("frequencyCountInput.huf");
+        hd.decodeFile("moby dick.txt.huf");
     }
 }
